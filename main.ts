@@ -21,18 +21,18 @@ let extensionsPath = path.join(userDataPath, "extensions");
 let onecExtensionPathManifest = path.join(extensionsPath, "pbhelknnhilelbnhfpcjlcabhmfangik", "manifest.json");
 
 async function createWindow() {
-  mainWindow = new BrowserWindow(
-    {
-      width: 800,
-      height: 600,
-      webPreferences: {
-        webSecurity: false,
-        nodeIntegration: true,
-        allowDisplayingInsecureContent: true,
-        allowRunningInsecureContent: true
-      }
+
+  const browserWindowOptions: Electron.BrowserWindowOptions = {
+    width: 800,
+    height: 600,
+    webPreferences: {
+      webSecurity: false,
+      nodeIntegration: true,
+      allowDisplayingInsecureContent: true,
+      allowRunningInsecureContent: true,
     }
-  );
+  };
+  mainWindow = new BrowserWindow(browserWindowOptions);
 
   await installExtension('pbhelknnhilelbnhfpcjlcabhmfangik', true);
 
