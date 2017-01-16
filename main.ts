@@ -1,24 +1,23 @@
-import path = require('path');
+import path = require("path");
 
-import jsonfile = require('jsonfile');
+import jsonfile = require("jsonfile");
 
 import electron = require("electron");
-import installExtension from 'electron-devtools-installer';
+import installExtension from "electron-devtools-installer";
 
-let app = electron.app;
-let dialog = electron.dialog;
-let BrowserWindow = electron.BrowserWindow;
-let Menu = electron.Menu;
+const app = electron.app;
+const dialog = electron.dialog;
+const BrowserWindow = electron.BrowserWindow;
+const Menu = electron.Menu;
 
 let mainWindow: Electron.BrowserWindow;
 
-let userDataPath = path.join(__dirname, "userdata");
-app.setPath('userData', userDataPath);
+const userDataPath = path.join(__dirname, "userdata");
+app.setPath("userData", userDataPath);
 
-
-
-let extensionsPath = path.join(userDataPath, "extensions");
-let onecExtensionPathManifest = path.join(extensionsPath, "pbhelknnhilelbnhfpcjlcabhmfangik", "manifest.json");
+const onecExtensionID = "pbhelknnhilelbnhfpcjlcabhmfangik";
+const extensionsPath = path.join(userDataPath, "extensions");
+const onecExtensionPathManifest = path.join(extensionsPath, onecExtensionID, "manifest.json");
 
 async function createWindow() {
 
@@ -34,17 +33,17 @@ async function createWindow() {
   };
   mainWindow = new BrowserWindow(browserWindowOptions);
 
-  await installExtension('pbhelknnhilelbnhfpcjlcabhmfangik', true);
+  await installExtension(onecExtensionID, true);
 
-  let manifest = jsonfile.readFileSync(onecExtensionPathManifest);
-  manifest.name = "pbhelknnhilelbnhfpcjlcabhmfangik";
+  const manifest = jsonfile.readFileSync(onecExtensionPathManifest);
+  manifest.name = onecExtensionID;
   jsonfile.writeFileSync(onecExtensionPathManifest, manifest);
 
   console.log("reload 1C extension");
 
-  await installExtension("pbhelknnhilelbnhfpcjlcabhmfangik", false);
+  await installExtension(onecExtensionID, false);
 
-  let template = [
+  const template = [
     {
       label: "Главная",
       submenu: [
@@ -74,7 +73,7 @@ async function createWindow() {
       ]
     }
   ];
-  let menu: Electron.Menu = Menu.buildFromTemplate(template);
+  const menu: Electron.Menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 
   mainWindow.loadURL(`http://accounting.demo.1c.ru/accounting/ru_RU/`);
@@ -85,56 +84,12 @@ async function createWindow() {
     mainWindow = null;
   });
 
-
-  //chrome-extension://pbhelknnhilelbnhfpcjlcabhmfangik/manifest.json
-  //is it recomiled
-
-  // let template = [
-  //   {
-  //     label: "Главная",
-  //     submenu: [
-  //       {
-  //         label: "Выход",
-  //         click: () => {
-  //           app.quit();
-  //         }
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     label: "Сервис",
-  //     submenu: [
-  //       {
-  //         label: "Настройки",
-  //         click: () => {
-  //           app.quit();
-  //         }
-  //       },
-  //       {
-  //         label: "О программе",
-  //         click: () => {
-  //           app.quit();
-  //         }
-  //       }
-  //     ]
-  //   }
-  // ];
-  // let menu: Electron.Menu = Menu.buildFromTemplate(template);
-  // Menu.setApplicationMenu(menu);
-
-  // mainWindow.loadURL(`http://accounting.demo.1c.ru/accounting/ru_RU/`);
-
-  // mainWindow.webContents.openDevTools();
-
-  // mainWindow.on("closed", () => {
-  //   mainWindow = null;
-  // });
 }
 
-// Call 'createWindow()' on startup.
+// Call "createWindow()" on startup.
 app.on("ready", () => {
   createWindow();
-  if (process.argv[1] != "main.js") {
+  if (process.argv[1] !== "main.js") {
     mainWindow.webContents.on("did-finish-load", () => {
       mainWindow.webContents.send("load-file", process.argv[1]);
     });
@@ -146,11 +101,11 @@ app.on("ready", () => {
 // with Cmd + Q.
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
-    app.quit()
+    app.quit();
   }
 });
 
-// On OS X it's common to re-create a window in the app when the dock icon is clicked and there are no other
+// On OS X it"s common to re-create a window in the app when the dock icon is clicked and there are no other
 // windows open.
 app.on("activate", () => {
   if (mainWindow === null) {
@@ -159,8 +114,8 @@ app.on("activate", () => {
 });
 
 function pauseBrowser(millis) {
-  var date = Date.now();
-  var curDate = null;
+  const date = Date.now();
+  let curDate = null;
   do {
     curDate = Date.now();
   } while (curDate - date < millis);
