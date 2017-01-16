@@ -23,11 +23,12 @@
   "homepage": "https://github.com/silverbulleters-research/enterprise-singleapp",
   "devDependencies": {
     "@types/electron": "^1.4.31",
-    "@types/electron-devtools-installer": "2.0.2",
+    "@types/electron-devtools-installer": "^2.0.2",
     "@types/node": "^6.0.60",
     "electron": "^1.4.14",
-    "electron-devtools-installer": "2.0.1",
+    "electron-devtools-installer": "^2.0.1",
     "electron-prebuilt": "^1.4.13",
-    "jsonfile": "2.4.0"
+    "jsonfile": "^2.4.0",
+    "tslint": "^4.3.1"
   }
 }
