@@ -33,7 +33,7 @@ async function createWindow() {
   };
   mainWindow = new BrowserWindow(browserWindowOptions);
 
-  await installExtension(onecExtensionID, true);
+  await installExtension(onecExtensionID, false);
 
   const manifest = jsonfile.readFileSync(onecExtensionPathManifest);
   manifest.name = onecExtensionID;

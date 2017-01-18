@@ -4,7 +4,7 @@
   "description": "Основанное на Electron IDE позволяющее организовать рабочее место современного сотрудника предприятия",
   "main": "main.js",
   "scripts": {
-    "build": "rm -rf ./userdata && tsc -p ./",
+    "build": "tsc -p ./",
     "prestart": "npm run build",
     "start": "electron main.js",
     "dist-win32-x64": "npm run build && electron . --out=dist --platform=win32 --arch=x64 --overwrite",
