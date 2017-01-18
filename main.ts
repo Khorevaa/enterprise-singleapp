@@ -33,7 +33,8 @@ async function createWindow() {
   };
   mainWindow = new BrowserWindow(browserWindowOptions);
 
-  await installExtension(onecExtensionID, false);
+  let result = await installExtension(onecExtensionID, true);
+  await electron.BrowserWindow.removeDevToolsExtension(result);
 
   const manifest = jsonfile.readFileSync(onecExtensionPathManifest);
   manifest.name = onecExtensionID;
