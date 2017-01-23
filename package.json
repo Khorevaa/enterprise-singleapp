@@ -1,10 +1,11 @@
 {
   "name": "enterprise-singleapp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Основанное на Electron IDE позволяющее организовать рабочее место современного сотрудника предприятия",
   "main": "main.js",
   "scripts": {
     "build": "tsc -p ./",
+    "features": "npm run build && electron-cucumber",
     "prestart": "npm run build",
     "start": "electron main.js",
     "dist-win32-x64": "npm run build && electron . --out=dist --platform=win32 --arch=x64 --overwrite",
@@ -18,15 +19,23 @@
   "author": "SilverBulleters, LLC",
   "license": "Mozilla",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/silverbulleters-research/enterprise-singleapp"
   },
   "homepage": "https://github.com/silverbulleters-research/enterprise-singleapp",
+  "dependencies": {
+    "electron-tabs": "^0.4.2",
+    "jsonfile": "^2.4.0",
+    "electron-devtools-installer": "^2.0.1"
+  },
   "devDependencies": {
     "@types/electron": "^1.4.31",
     "@types/electron-devtools-installer": "^2.0.2",
     "@types/node": "^6.0.60",
+    "cucumber-electron": "^2.0.3",
     "electron": "^1.4.14",
+    "electron-cucumber": "^0.1.0",
     "electron-devtools-installer": "^2.0.1",
+    "electron-packager": "^8.5.0",
     "electron-prebuilt": "^1.4.13",
     "jsonfile": "^2.4.0",
     "tslint": "^4.3.1"
