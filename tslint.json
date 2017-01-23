@@ -1,11 +1,12 @@
 {
-	"extends": [
-		"tslint:latest"
-	],
-	"rules": {
-		"object-literal-sort-keys": false,
-		"trailing-comma": [
-			false
-		]
-	}
+    "extends": "tslint:latest",
+    "rules": {
+        "semicolon": [
+            "always"
+        ],
+        "object-literal-sort-keys": false,
+        "trailing-comma": [
+            false
+        ]
+    }
 }

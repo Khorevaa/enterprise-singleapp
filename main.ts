@@ -6,14 +6,16 @@ import electron = require("electron");
 import installExtension from "electron-devtools-installer";
 
 const app = electron.app;
+const tray = electron.Tray;
 const dialog = electron.dialog;
 const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 
 let mainWindow: Electron.BrowserWindow;
 
-const userDataPath = path.join(__dirname, "userdata");
-app.setPath("userData", userDataPath);
+//const userDataPath = path.join(__dirname, "userdata");
+const userDataPath = app.getPath("userData");
+//app.setPath("userData", userDataPath);
 
 const onecExtensionID = "pbhelknnhilelbnhfpcjlcabhmfangik";
 const extensionsPath = path.join(userDataPath, "extensions");
@@ -77,9 +79,12 @@ async function createWindow() {
   const menu: Electron.Menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 
-  mainWindow.loadURL(`http://accounting.demo.1c.ru/accounting/ru_RU/`);
+  //mainWindow.loadURL(`http://accounting.demo.1c.ru/accounting/ru_RU/`);
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
+
+  app.setAsDefaultProtocolClient("callto")
 
   mainWindow.on("closed", () => {
     mainWindow = null;
@@ -95,6 +100,9 @@ app.on("ready", () => {
       mainWindow.webContents.send("load-file", process.argv[1]);
     });
   }
+
+   let ourtray = new tray('icon.png');
+   ourtray.setToolTip('Единое окно предприятия.')
 
 });
 
